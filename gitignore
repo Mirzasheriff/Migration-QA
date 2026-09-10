@@ -1,0 +1,31 @@
+# --- Secrets — never commit these ---
+.env
+.env.*
+!.env.example
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# --- Generated / run outputs (safe to regenerate, keep the repo clean) ---
+# Rebuilt automatically by core/rag.py on first run — see README.
+vector_store.json
+# Written fresh every time you run the pipeline.
+agent_result.json
+data_qa_result.json
+visual_qa_result.json
+validation_result.xlsx
+validation_result_*.xlsx
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
