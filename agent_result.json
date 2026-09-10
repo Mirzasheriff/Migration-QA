@@ -1,0 +1,574 @@
+{
+  "data_qa": {
+    "spotfire_rows": 1000,
+    "powerbi_rows": 990,
+    "spotfire_columns": 8,
+    "powerbi_columns": 8,
+    "missing_rows": 15,
+    "extra_rows": 5,
+    "missing_row_ids": [
+      "100010",
+      "100011",
+      "100012",
+      "100013",
+      "100014",
+      "100015",
+      "100016",
+      "100017",
+      "100018",
+      "100019",
+      "100020",
+      "100021",
+      "100022",
+      "100023",
+      "100024"
+    ],
+    "extra_row_ids": [
+      "200001",
+      "200002",
+      "200003",
+      "200004",
+      "200005"
+    ],
+    "total_value_mismatches": 30,
+    "mismatches_by_column": {
+      "Sales": 20,
+      "Profit": 10
+    },
+    "structure": {
+      "missing_columns_in_powerbi": [],
+      "extra_columns_in_powerbi": [],
+      "column_order_matches": true
+    },
+    "overall_result": "FAIL",
+    "excel_report_path": "validation_result.xlsx"
+  },
+  "visual_qa": {
+    "overall_status": "FAIL",
+    "overall_confidence": 0.98,
+    "checks": [
+      {
+        "category": "Report title",
+        "status": "FAIL",
+        "spotfire_observation": "The report title is clearly rendered as 'Sales Overview'.",
+        "powerbi_observation": "The main banner title has been changed to 'Sales Performance', and an overlaid text box reads 'Sales $2.51M'.",
+        "severity": "MEDIUM",
+        "confidence": 0.95,
+        "explanation": "The title text does not match the baseline Spotfire report title and includes added text overlays."
+      },
+      {
+        "category": "Navigation bar / tools",
+        "status": "FAIL",
+        "spotfire_observation": "Displays Spotfire left vertical navigation panel and standard top menu items (File, Edit, Data, etc.).",
+        "powerbi_observation": "Displays Power BI web service action bar at top and Visualizations/Filters side panel on the right.",
+        "severity": "LOW",
+        "confidence": 0.9,
+        "explanation": "Differences stem from platform-native toolbars, but side panels alter page canvas proportions."
+      },
+      {
+        "category": "Number of visuals",
+        "status": "FAIL",
+        "spotfire_observation": "Contains 8 distinct visuals: 4 KPI cards, 3 charts (Pie, Line, Bar), and 1 detail table.",
+        "powerbi_observation": "Only 4 KPI cards and 1 Bar chart are visible; 2 charts are completely missing under a 'Visual Missing' placeholder, and the table is partially obscured.",
+        "severity": "HIGH",
+        "confidence": 0.98,
+        "explanation": "Multiple required visual controls are missing in the Power BI report."
+      },
+      {
+        "category": "Visual types",
+        "status": "FAIL",
+        "spotfire_observation": "Uses KPI KPI summary cards, a Pie chart, a Line chart, a Horizontal Bar chart, and a Table visual.",
+        "powerbi_observation": "Pie chart and Line chart types are absent, replaced by a large white placeholder box.",
+        "severity": "HIGH",
+        "confidence": 0.98,
+        "explanation": "Chart visual types for 'Sales by Region' (Pie) and 'Sales Trend' (Line) were not migrated."
+      },
+      {
+        "category": "Approximate visual positions",
+        "status": "FAIL",
+        "spotfire_observation": "Organized into three horizontal sections: top KPI cards, middle 3 charts, bottom table.",
+        "powerbi_observation": "The middle-left section is occupied by an overlay placeholder box obscuring the intended chart positions.",
+        "severity": "HIGH",
+        "confidence": 0.95,
+        "explanation": "Visual positioning in the middle grid area is disrupted by missing visuals."
+      },
+      {
+        "category": "Filters / slicers",
+        "status": "PASS",
+        "spotfire_observation": "Top-right contains 'Year' dropdown (2024) and 'Region' dropdown ((All)).",
+        "powerbi_observation": "Top-right contains 'Year' dropdown (2024) and 'Region' dropdown (All).",
+        "severity": "NONE",
+        "confidence": 0.95,
+        "explanation": "Slicers match in placement, filter selections, and functionality."
+      },
+      {
+        "category": "Chart labels and visible values",
+        "status": "FAIL",
+        "spotfire_observation": "All chart labels, axes, slice percentages, and bar data values are visible.",
+        "powerbi_observation": "Bar chart data values ($732K, $598K, etc.) are present, but Pie and Line chart values/labels are absent due to missing visuals.",
+        "severity": "HIGH",
+        "confidence": 0.95,
+        "explanation": "Labels and values cannot be verified for the missing charts."
+      },
+      {
+        "category": "Tables",
+        "status": "FAIL",
+        "spotfire_observation": "'Sales Details' table displays all 8 columns clearly (Order ID, Order Date, Region, Category, Product, Sales, Profit, Quantity).",
+        "powerbi_observation": "The left half of the 'Sales Details' table is covered by the 'Visual Missing' box, hiding the Order ID, Date, Region, Category, and Product columns.",
+        "severity": "HIGH",
+        "confidence": 0.98,
+        "explanation": "The primary detail table visual is partially obstructed and unreadable."
+      },
+      {
+        "category": "Overall layout",
+        "status": "FAIL",
+        "spotfire_observation": "Clean, proportional three-row dashboard design.",
+        "powerbi_observation": "Layout is broken due to visual occlusion, missing visuals, and header text overlays.",
+        "severity": "HIGH",
+        "confidence": 0.98,
+        "explanation": "The Power BI page layout is corrupted and incomplete."
+      },
+      {
+        "category": "Overall visual fidelity",
+        "status": "FAIL",
+        "spotfire_observation": "Baseline reference visual presentation.",
+        "powerbi_observation": "Poor visual fidelity due to missing visual components, obscuring overlays, and altered headers.",
+        "severity": "HIGH",
+        "confidence": 0.98,
+        "explanation": "The report fails to meet visual equivalence requirements."
+      }
+    ],
+    "summary": "The Power BI report migration failed QA validation. Critical defects include missing 'Sales by Region' (Pie) and 'Sales Trend' (Line) charts replaced by a 'Visual Missing' placeholder box, which also partially obscures the 'Sales Details' table. Additionally, the report title was modified from 'Sales Overview' to 'Sales Performance'."
+  },
+  "analysis": {
+    "overall_status": "FAIL",
+    "risk_level": "CRITICAL",
+    "primary_issue_type": "BOTH",
+    "critical_findings": [
+      {
+        "issue": "Missing visuals and visual occlusion due to dataset/rendering binding failure",
+        "area": "VISUAL",
+        "severity": "HIGH",
+        "reason": "The 'Sales by Region' (Pie) and 'Sales Trend' (Line) charts fail to render, replaced by a 'Visual Missing' placeholder box that obscures the left half of the 'Sales Details' table. As noted in Migration Rule rule-003 and past case-102, this is characteristic of a broken data source or table binding failure rather than intentional removal."
+      },
+      {
+        "issue": "Data row count mismatch and record discrepancies",
+        "area": "DATA",
+        "severity": "HIGH",
+        "reason": "Power BI contains 990 rows vs. Spotfire's 1000 rows, with 15 missing row IDs (100010\u2013100024) and 5 extra row IDs (200001\u2013200005), indicating a flawed ETL/data import query or incorrect filtering."
+      },
+      {
+        "issue": "Data value mismatches in core financial metrics (Sales & Profit)",
+        "area": "DATA",
+        "severity": "HIGH",
+        "reason": "30 total value mismatches exist across Sales (20) and Profit (10). Similar to past case-101, where an added text overlay showed 'Sales $2.51M' due to an unfiltered/duplicated dataset, dataset integrity must be rectified."
+      },
+      {
+        "issue": "Unauthorized report title modification and overlay text box",
+        "area": "VISUAL",
+        "severity": "MEDIUM",
+        "reason": "Report title was altered from 'Sales Overview' to 'Sales Performance', and an unnecessary text overlay ('Sales $2.51M') was introduced."
+      }
+    ],
+    "priority_actions": [
+      {
+        "priority": 1,
+        "action": "Rebind missing visuals to the correct Power BI dataset tables and restore layout",
+        "reason": "Following rule-003 and case-102, resolve the broken table bindings for the Pie and Line charts to remove the 'Visual Missing' box and unobscure the detail table."
+      },
+      {
+        "priority": 2,
+        "action": "Reconcile data source queries to fix row discrepancies and value mismatches",
+        "reason": "Investigate missing rows (IDs 100010\u2013100024), extra rows (200001\u2013200005), and Sales/Profit calculations (similar to case-101 filter/duplication issues)."
+      },
+      {
+        "priority": 3,
+        "action": "Restore original report title and remove unapproved banner overlays",
+        "reason": "Align report header text to baseline ('Sales Overview') to maintain visual compliance."
+      }
+    ],
+    "management_summary": "The Power BI migration for the Sales Overview report has failed QA validation due to critical data and visual defects. Significant data mismatches exist, including missing/extra records and 30 metric value discrepancies in Sales and Profit. Visually, two primary charts are broken due to binding failures, creating layout corruption that obscures the detail table. Deployment is blocked until data pipeline and visual bindings are corrected.",
+    "developer_summary": "Fix data source queries causing the row discrepancy (Spotfire 1000 rows vs Power BI 990 rows; missing IDs 100010\u2013100024, extra IDs 200001\u2013200005) and resolve 30 value mismatches in Sales and Profit fields (reference case-101 for potential dataset filtering issues). Rebind the 'Sales by Region' (Pie) and 'Sales Trend' (Line) visuals to the correct dataset tables to clear the 'Visual Missing' placeholder (per rule-003 and case-102) and reveal the obscured 'Sales Details' table columns. Finally, reset title to 'Sales Overview' and remove the '$2.51M' overlay box.",
+    "next_qa_action": "Reject current build, assign remediation tickets to the development team, and perform a full Data & Visual re-validation upon delivery of the corrected Power BI report."
+  },
+  "trace": [
+    {
+      "step": 1,
+      "type": "tool_call",
+      "tool": "validate_data",
+      "args": {
+        "spotfire_excel_path": "spotfire_reference.xlsx",
+        "powerbi_excel_path": "powerbi_migrated.xlsx"
+      }
+    },
+    {
+      "step": 1,
+      "type": "tool_result",
+      "tool": "validate_data",
+      "result": {
+        "spotfire_rows": 1000,
+        "powerbi_rows": 990,
+        "spotfire_columns": 8,
+        "powerbi_columns": 8,
+        "missing_rows": 15,
+        "extra_rows": 5,
+        "missing_row_ids": [
+          "100010",
+          "100011",
+          "100012",
+          "100013",
+          "100014",
+          "100015",
+          "100016",
+          "100017",
+          "100018",
+          "100019",
+          "100020",
+          "100021",
+          "100022",
+          "100023",
+          "100024"
+        ],
+        "extra_row_ids": [
+          "200001",
+          "200002",
+          "200003",
+          "200004",
+          "200005"
+        ],
+        "total_value_mismatches": 30,
+        "mismatches_by_column": {
+          "Sales": 20,
+          "Profit": 10
+        },
+        "structure": {
+          "missing_columns_in_powerbi": [],
+          "extra_columns_in_powerbi": [],
+          "column_order_matches": true
+        },
+        "overall_result": "FAIL",
+        "excel_report_path": "validation_result.xlsx"
+      }
+    },
+    {
+      "step": 2,
+      "type": "tool_call",
+      "tool": "validate_visual",
+      "args": {
+        "spotfire_image_path": "spotfire_reference.png",
+        "powerbi_image_path": "powerbi_defective.png"
+      }
+    },
+    {
+      "step": 2,
+      "type": "tool_result",
+      "tool": "validate_visual",
+      "result": {
+        "overall_status": "FAIL",
+        "overall_confidence": 0.98,
+        "checks": [
+          {
+            "category": "Report title",
+            "status": "FAIL",
+            "spotfire_observation": "The report title is clearly rendered as 'Sales Overview'.",
+            "powerbi_observation": "The main banner title has been changed to 'Sales Performance', and an overlaid text box reads 'Sales $2.51M'.",
+            "severity": "MEDIUM",
+            "confidence": 0.95,
+            "explanation": "The title text does not match the baseline Spotfire report title and includes added text overlays."
+          },
+          {
+            "category": "Navigation bar / tools",
+            "status": "FAIL",
+            "spotfire_observation": "Displays Spotfire left vertical navigation panel and standard top menu items (File, Edit, Data, etc.).",
+            "powerbi_observation": "Displays Power BI web service action bar at top and Visualizations/Filters side panel on the right.",
+            "severity": "LOW",
+            "confidence": 0.9,
+            "explanation": "Differences stem from platform-native toolbars, but side panels alter page canvas proportions."
+          },
+          {
+            "category": "Number of visuals",
+            "status": "FAIL",
+            "spotfire_observation": "Contains 8 distinct visuals: 4 KPI cards, 3 charts (Pie, Line, Bar), and 1 detail table.",
+            "powerbi_observation": "Only 4 KPI cards and 1 Bar chart are visible; 2 charts are completely missing under a 'Visual Missing' placeholder, and the table is partially obscured.",
+            "severity": "HIGH",
+            "confidence": 0.98,
+            "explanation": "Multiple required visual controls are missing in the Power BI report."
+          },
+          {
+            "category": "Visual types",
+            "status": "FAIL",
+            "spotfire_observation": "Uses KPI KPI summary cards, a Pie chart, a Line chart, a Horizontal Bar chart, and a Table visual.",
+            "powerbi_observation": "Pie chart and Line chart types are absent, replaced by a large white placeholder box.",
+            "severity": "HIGH",
+            "confidence": 0.98,
+            "explanation": "Chart visual types for 'Sales by Region' (Pie) and 'Sales Trend' (Line) were not migrated."
+          },
+          {
+            "category": "Approximate visual positions",
+            "status": "FAIL",
+            "spotfire_observation": "Organized into three horizontal sections: top KPI cards, middle 3 charts, bottom table.",
+            "powerbi_observation": "The middle-left section is occupied by an overlay placeholder box obscuring the intended chart positions.",
+            "severity": "HIGH",
+            "confidence": 0.95,
+            "explanation": "Visual positioning in the middle grid area is disrupted by missing visuals."
+          },
+          {
+            "category": "Filters / slicers",
+            "status": "PASS",
+            "spotfire_observation": "Top-right contains 'Year' dropdown (2024) and 'Region' dropdown ((All)).",
+            "powerbi_observation": "Top-right contains 'Year' dropdown (2024) and 'Region' dropdown (All).",
+            "severity": "NONE",
+            "confidence": 0.95,
+            "explanation": "Slicers match in placement, filter selections, and functionality."
+          },
+          {
+            "category": "Chart labels and visible values",
+            "status": "FAIL",
+            "spotfire_observation": "All chart labels, axes, slice percentages, and bar data values are visible.",
+            "powerbi_observation": "Bar chart data values ($732K, $598K, etc.) are present, but Pie and Line chart values/labels are absent due to missing visuals.",
+            "severity": "HIGH",
+            "confidence": 0.95,
+            "explanation": "Labels and values cannot be verified for the missing charts."
+          },
+          {
+            "category": "Tables",
+            "status": "FAIL",
+            "spotfire_observation": "'Sales Details' table displays all 8 columns clearly (Order ID, Order Date, Region, Category, Product, Sales, Profit, Quantity).",
+            "powerbi_observation": "The left half of the 'Sales Details' table is covered by the 'Visual Missing' box, hiding the Order ID, Date, Region, Category, and Product columns.",
+            "severity": "HIGH",
+            "confidence": 0.98,
+            "explanation": "The primary detail table visual is partially obstructed and unreadable."
+          },
+          {
+            "category": "Overall layout",
+            "status": "FAIL",
+            "spotfire_observation": "Clean, proportional three-row dashboard design.",
+            "powerbi_observation": "Layout is broken due to visual occlusion, missing visuals, and header text overlays.",
+            "severity": "HIGH",
+            "confidence": 0.98,
+            "explanation": "The Power BI page layout is corrupted and incomplete."
+          },
+          {
+            "category": "Overall visual fidelity",
+            "status": "FAIL",
+            "spotfire_observation": "Baseline reference visual presentation.",
+            "powerbi_observation": "Poor visual fidelity due to missing visual components, obscuring overlays, and altered headers.",
+            "severity": "HIGH",
+            "confidence": 0.98,
+            "explanation": "The report fails to meet visual equivalence requirements."
+          }
+        ],
+        "summary": "The Power BI report migration failed QA validation. Critical defects include missing 'Sales by Region' (Pie) and 'Sales Trend' (Line) charts replaced by a 'Visual Missing' placeholder box, which also partially obscures the 'Sales Details' table. Additionally, the report title was modified from 'Sales Overview' to 'Sales Performance'."
+      }
+    },
+    {
+      "step": 3,
+      "type": "tool_call",
+      "tool": "analyze",
+      "args": {
+        "data_qa": {
+          "extra_row_ids": [
+            200001,
+            200002,
+            200003,
+            200004,
+            200005
+          ],
+          "spotfire_rows": 1000,
+          "structure": {
+            "column_order_matches": true,
+            "extra_columns_in_powerbi": [],
+            "missing_columns_in_powerbi": []
+          },
+          "extra_rows": 5,
+          "overall_result": "FAIL",
+          "missing_rows": 15,
+          "powerbi_columns": 8,
+          "excel_report_path": "validation_result.xlsx",
+          "total_value_mismatches": 30,
+          "missing_row_ids": [
+            100010,
+            100011,
+            100012,
+            100013,
+            100014,
+            100015,
+            100016,
+            100017,
+            100018,
+            100019,
+            100020,
+            100021,
+            100022,
+            100023,
+            100024
+          ],
+          "powerbi_rows": 990,
+          "mismatches_by_column": {
+            "Sales": 20,
+            "Profit": 10
+          },
+          "spotfire_columns": 8
+        },
+        "visual_qa": {
+          "checks": [
+            {
+              "explanation": "The title text does not match the baseline Spotfire report title and includes added text overlays.",
+              "confidence": 0.95,
+              "severity": "MEDIUM",
+              "spotfire_observation": "The report title is clearly rendered as 'Sales Overview'.",
+              "category": "Report title",
+              "status": "FAIL",
+              "powerbi_observation": "The main banner title has been changed to 'Sales Performance', and an overlaid text box reads 'Sales $2.51M'."
+            },
+            {
+              "confidence": 0.9,
+              "category": "Navigation bar / tools",
+              "powerbi_observation": "Displays Power BI web service action bar at top and Visualizations/Filters side panel on the right.",
+              "spotfire_observation": "Displays Spotfire left vertical navigation panel and standard top menu items (File, Edit, Data, etc.).",
+              "status": "FAIL",
+              "severity": "LOW",
+              "explanation": "Differences stem from platform-native toolbars, but side panels alter page canvas proportions."
+            },
+            {
+              "status": "FAIL",
+              "explanation": "Multiple required visual controls are missing in the Power BI report.",
+              "confidence": 0.98,
+              "severity": "HIGH",
+              "spotfire_observation": "Contains 8 distinct visuals: 4 KPI cards, 3 charts (Pie, Line, Bar), and 1 detail table.",
+              "powerbi_observation": "Only 4 KPI cards and 1 Bar chart are visible; 2 charts are completely missing under a 'Visual Missing' placeholder, and the table is partially obscured.",
+              "category": "Number of visuals"
+            },
+            {
+              "category": "Visual types",
+              "confidence": 0.98,
+              "spotfire_observation": "Uses KPI KPI summary cards, a Pie chart, a Line chart, a Horizontal Bar chart, and a Table visual.",
+              "status": "FAIL",
+              "severity": "HIGH",
+              "powerbi_observation": "Pie chart and Line chart types are absent, replaced by a large white placeholder box.",
+              "explanation": "Chart visual types for 'Sales by Region' (Pie) and 'Sales Trend' (Line) were not migrated."
+            },
+            {
+              "spotfire_observation": "Organized into three horizontal sections: top KPI cards, middle 3 charts, bottom table.",
+              "confidence": 0.95,
+              "category": "Approximate visual positions",
+              "explanation": "Visual positioning in the middle grid area is disrupted by missing visuals.",
+              "powerbi_observation": "The middle-left section is occupied by an overlay placeholder box obscuring the intended chart positions.",
+              "severity": "HIGH",
+              "status": "FAIL"
+            },
+            {
+              "spotfire_observation": "Top-right contains 'Year' dropdown (2024) and 'Region' dropdown ((All)).",
+              "severity": "NONE",
+              "powerbi_observation": "Top-right contains 'Year' dropdown (2024) and 'Region' dropdown (All).",
+              "confidence": 0.95,
+              "category": "Filters / slicers",
+              "status": "PASS",
+              "explanation": "Slicers match in placement, filter selections, and functionality."
+            },
+            {
+              "confidence": 0.95,
+              "category": "Chart labels and visible values",
+              "powerbi_observation": "Bar chart data values ($732K, $598K, etc.) are present, but Pie and Line chart values/labels are absent due to missing visuals.",
+              "explanation": "Labels and values cannot be verified for the missing charts.",
+              "status": "FAIL",
+              "spotfire_observation": "All chart labels, axes, slice percentages, and bar data values are visible.",
+              "severity": "HIGH"
+            },
+            {
+              "category": "Tables",
+              "status": "FAIL",
+              "confidence": 0.98,
+              "spotfire_observation": "'Sales Details' table displays all 8 columns clearly (Order ID, Order Date, Region, Category, Product, Sales, Profit, Quantity).",
+              "powerbi_observation": "The left half of the 'Sales Details' table is covered by the 'Visual Missing' box, hiding the Order ID, Date, Region, Category, and Product columns.",
+              "explanation": "The primary detail table visual is partially obstructed and unreadable.",
+              "severity": "HIGH"
+            },
+            {
+              "confidence": 0.98,
+              "severity": "HIGH",
+              "powerbi_observation": "Layout is broken due to visual occlusion, missing visuals, and header text overlays.",
+              "explanation": "The Power BI page layout is corrupted and incomplete.",
+              "spotfire_observation": "Clean, proportional three-row dashboard design.",
+              "category": "Overall layout",
+              "status": "FAIL"
+            },
+            {
+              "severity": "HIGH",
+              "spotfire_observation": "Baseline reference visual presentation.",
+              "explanation": "The report fails to meet visual equivalence requirements.",
+              "status": "FAIL",
+              "category": "Overall visual fidelity",
+              "confidence": 0.98,
+              "powerbi_observation": "Poor visual fidelity due to missing visual components, obscuring overlays, and altered headers."
+            }
+          ],
+          "overall_confidence": 0.98,
+          "summary": "The Power BI report migration failed QA validation. Critical defects include missing 'Sales by Region' (Pie) and 'Sales Trend' (Line) charts replaced by a 'Visual Missing' placeholder box, which also partially obscures the 'Sales Details' table. Additionally, the report title was modified from 'Sales Overview' to 'Sales Performance'.",
+          "overall_status": "FAIL"
+        }
+      }
+    },
+    {
+      "step": 3,
+      "type": "tool_result",
+      "tool": "analyze",
+      "result": {
+        "overall_status": "FAIL",
+        "risk_level": "CRITICAL",
+        "primary_issue_type": "BOTH",
+        "critical_findings": [
+          {
+            "issue": "Missing visuals and visual occlusion due to dataset/rendering binding failure",
+            "area": "VISUAL",
+            "severity": "HIGH",
+            "reason": "The 'Sales by Region' (Pie) and 'Sales Trend' (Line) charts fail to render, replaced by a 'Visual Missing' placeholder box that obscures the left half of the 'Sales Details' table. As noted in Migration Rule rule-003 and past case-102, this is characteristic of a broken data source or table binding failure rather than intentional removal."
+          },
+          {
+            "issue": "Data row count mismatch and record discrepancies",
+            "area": "DATA",
+            "severity": "HIGH",
+            "reason": "Power BI contains 990 rows vs. Spotfire's 1000 rows, with 15 missing row IDs (100010\u2013100024) and 5 extra row IDs (200001\u2013200005), indicating a flawed ETL/data import query or incorrect filtering."
+          },
+          {
+            "issue": "Data value mismatches in core financial metrics (Sales & Profit)",
+            "area": "DATA",
+            "severity": "HIGH",
+            "reason": "30 total value mismatches exist across Sales (20) and Profit (10). Similar to past case-101, where an added text overlay showed 'Sales $2.51M' due to an unfiltered/duplicated dataset, dataset integrity must be rectified."
+          },
+          {
+            "issue": "Unauthorized report title modification and overlay text box",
+            "area": "VISUAL",
+            "severity": "MEDIUM",
+            "reason": "Report title was altered from 'Sales Overview' to 'Sales Performance', and an unnecessary text overlay ('Sales $2.51M') was introduced."
+          }
+        ],
+        "priority_actions": [
+          {
+            "priority": 1,
+            "action": "Rebind missing visuals to the correct Power BI dataset tables and restore layout",
+            "reason": "Following rule-003 and case-102, resolve the broken table bindings for the Pie and Line charts to remove the 'Visual Missing' box and unobscure the detail table."
+          },
+          {
+            "priority": 2,
+            "action": "Reconcile data source queries to fix row discrepancies and value mismatches",
+            "reason": "Investigate missing rows (IDs 100010\u2013100024), extra rows (200001\u2013200005), and Sales/Profit calculations (similar to case-101 filter/duplication issues)."
+          },
+          {
+            "priority": 3,
+            "action": "Restore original report title and remove unapproved banner overlays",
+            "reason": "Align report header text to baseline ('Sales Overview') to maintain visual compliance."
+          }
+        ],
+        "management_summary": "The Power BI migration for the Sales Overview report has failed QA validation due to critical data and visual defects. Significant data mismatches exist, including missing/extra records and 30 metric value discrepancies in Sales and Profit. Visually, two primary charts are broken due to binding failures, creating layout corruption that obscures the detail table. Deployment is blocked until data pipeline and visual bindings are corrected.",
+        "developer_summary": "Fix data source queries causing the row discrepancy (Spotfire 1000 rows vs Power BI 990 rows; missing IDs 100010\u2013100024, extra IDs 200001\u2013200005) and resolve 30 value mismatches in Sales and Profit fields (reference case-101 for potential dataset filtering issues). Rebind the 'Sales by Region' (Pie) and 'Sales Trend' (Line) visuals to the correct dataset tables to clear the 'Visual Missing' placeholder (per rule-003 and case-102) and reveal the obscured 'Sales Details' table columns. Finally, reset title to 'Sales Overview' and remove the '$2.51M' overlay box.",
+        "next_qa_action": "Reject current build, assign remediation tickets to the development team, and perform a full Data & Visual re-validation upon delivery of the corrected Power BI report."
+      }
+    },
+    {
+      "step": 3,
+      "type": "stopping",
+      "reason": "analysis complete"
+    }
+  ]
+}

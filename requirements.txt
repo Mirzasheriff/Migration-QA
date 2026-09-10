@@ -1,0 +1,33 @@
+# Core pipeline
+pandas
+openpyxl
+numpy
+Pillow
+
+# Gemini API (visual validation, AI analysis, agent, Gemini embeddings)
+google-genai
+
+# OCR fallback
+pytesseract
+pdf2image          # only needed if you use extract_report_from_pdf()
+
+# RAG / embeddings / vector store
+scikit-learn        # local TF-IDF fallback embedder — no API key needed
+
+# MCP server
+fastmcp
+
+# FastAPI backend
+fastapi
+uvicorn
+python-multipart     # required by FastAPI for file uploads
+
+# Config
+python-dotenv
+
+# --------------------------------------------------------------------
+# You ALSO need Tesseract OCR itself (not just the Python wrapper) —
+# see https://github.com/UB-Mannheim/tesseract/wiki for Windows.
+# core/ocr_tool.py auto-detects common install locations, or set
+# TESSERACT_CMD if installed somewhere unusual.
+# --------------------------------------------------------------------

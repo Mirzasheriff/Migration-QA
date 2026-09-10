@@ -1,0 +1,50 @@
+[
+  {
+    "id": "rule-001",
+    "type": "rule",
+    "text": "Sales dashboards must use the Sales Amount measure, not Sales Quantity, for all revenue KPI cards. A KPI card showing a much smaller number than the Spotfire reference often means the wrong measure was bound.",
+    "metadata": {"source": "Migration Rules v3", "category": "data"}
+  },
+  {
+    "id": "rule-002",
+    "type": "rule",
+    "text": "Every migrated report must preserve the Order ID column as the primary key. Row-count mismatches after migration are almost always caused by a filter or join condition dropped during the Power BI rebuild, not by genuine data loss upstream.",
+    "metadata": {"source": "Migration Rules v3", "category": "data"}
+  },
+  {
+    "id": "rule-003",
+    "type": "rule",
+    "text": "Visuals must be rebuilt in the same order and approximate position as the Spotfire source. A visual reported as 'missing' after migration is more often a rendering/binding failure (broken data source reference) than an intentionally removed chart.",
+    "metadata": {"source": "Migration Rules v3", "category": "visual"}
+  },
+  {
+    "id": "rule-004",
+    "type": "rule",
+    "text": "Report titles must exactly match the Spotfire source title, including capitalization. Title drift usually indicates the developer copied a template report and forgot to rename it.",
+    "metadata": {"source": "Migration Rules v3", "category": "visual"}
+  },
+  {
+    "id": "case-101",
+    "type": "past_case",
+    "text": "March batch, Regional Sales report: total Sales KPI showed $2.51M vs Spotfire's $2.31M reference. Root cause: the Power BI card was bound to a duplicated, unfiltered dataset that included a test region. Fixed by correcting the dataset filter.",
+    "metadata": {"source": "QA Archive", "date": "2026-03-14", "resolution": "Filter corrected on source dataset"}
+  },
+  {
+    "id": "case-102",
+    "type": "past_case",
+    "text": "February batch, Inventory Dashboard: pie chart visual failed to render post-migration, showing a blank panel labeled 'Visual Missing'. Root cause: the visual's data source pointed to a renamed table from the old Spotfire connection. Fixed by rebinding the visual to the new Power BI dataset table.",
+    "metadata": {"source": "QA Archive", "date": "2026-02-02", "resolution": "Rebound visual to correct table"}
+  },
+  {
+    "id": "case-103",
+    "type": "past_case",
+    "text": "January batch, Customer Retention report: 15 rows present in Spotfire were missing from the migrated Power BI export. Root cause: an inner join in the Power BI data model silently excluded customers with a null region field. Fixed by switching to a left join and adding an 'Unknown Region' bucket.",
+    "metadata": {"source": "QA Archive", "date": "2026-01-20", "resolution": "Changed join type, added default bucket"}
+  },
+  {
+    "id": "case-104",
+    "type": "past_case",
+    "text": "December batch, Executive Summary report: report title read 'Sales Performance' instead of the Spotfire source title 'Sales Overview'. Root cause: developer started from a shared template and did not rename it. Fixed by correcting the title text box.",
+    "metadata": {"source": "QA Archive", "date": "2025-12-11", "resolution": "Title text corrected"}
+  }
+]
